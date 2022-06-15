@@ -9,21 +9,16 @@ function App() {
 
   return (
     <div className='App'>
-      <FoodBox food={{
-        name: "Orange",
-        calories: 85,
-        image: "https://i.imgur.com/abKGOcv.jpg",
-        servings: 1
-      }} />
+      
+      <Row style={{ width: '100%', justifyContent: 'center' }}>
+        {foods.map(food => {
+          return (
+            <FoodBox food={food} />
+          )
+        })}
+      </Row>
 
-      {foods.map(food => {
-        return (
-          <div>
-            <p> {food.name} </p>
-            <img src={food.image} width={100} alt={food.name} />
-          </div>
-        )
-      })}
+      
 
     </div>
   )
