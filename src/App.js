@@ -4,25 +4,38 @@ import foodsJSON from './foods.json';
 import { useState } from 'react';
 import FoodBox from './components/FoodBox';
 import AddFoodForm from './components/AddFoodForm';
+import Search from './components/Search';
 
 
 
 function App() {
+  const [searchString, setSearchString] = useState("");
+
+  const handleSearchStringInput = e => setSearchString(e.target.value);
+
   const [foods, setFoods] = useState(foodsJSON);
 
-  
   const addFood = (newFood) => {
     const foodsCopy = structuredClone(foods);
     foodsCopy.push(newFood);
     setFoods(foodsCopy);
   };
 
+  const searchInArrayOfObjects = (arr, query) => {
+    return arr.filter(element => {
+      return element.name.indexOf(query) !== -1
+    })
+  }
+
+
   return (
     <div className='App'>
+      <Search searchString={searchString} setter={handleSearchStringInput} test={"hithere"} />
+
       <AddFoodForm addFood={addFood} />
-      
+
       <Row style={{ width: '100%', justifyContent: 'center' }}>
-        {foods.map((food, index) => {
+        {searchInArrayOfObjects(foods, searchString).map((food, index) => {
           return (
             <FoodBox key={index} food={food} />
           )
