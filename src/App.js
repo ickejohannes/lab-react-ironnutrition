@@ -2,12 +2,20 @@ import './App.css';
 import { Card, Row, Col, Divider, Input, Button } from 'antd';
 import foodsJSON from './foods.json';
 import { useState } from 'react';
+import FoodBox from './components/FoodBox';
 
 function App() {
   const [foods, setFoods] = useState(foodsJSON);
 
   return (
     <div className='App'>
+      <FoodBox food={{
+        name: "Orange",
+        calories: 85,
+        image: "https://i.imgur.com/abKGOcv.jpg",
+        servings: 1
+      }} />
+
       {foods.map(food => {
         return (
           <div>
@@ -32,6 +40,7 @@ function App2() {
       <Button> Hide Form / Add New Food </Button>
 
       {/* Display Search component here */}
+      
 
       <Divider>Food List</Divider>
 
