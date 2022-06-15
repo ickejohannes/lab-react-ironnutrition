@@ -3,23 +3,31 @@ import { Card, Row, Col, Divider, Input, Button } from 'antd';
 import foodsJSON from './foods.json';
 import { useState } from 'react';
 import FoodBox from './components/FoodBox';
+import AddFoodForm from './components/AddFoodForm';
+
+
 
 function App() {
   const [foods, setFoods] = useState(foodsJSON);
 
+  
+  const addFood = (newFood) => {
+    const foodsCopy = structuredClone(foods);
+    foodsCopy.push(newFood);
+    setFoods(foodsCopy);
+  };
+
   return (
     <div className='App'>
+      <AddFoodForm addFood={addFood} />
       
       <Row style={{ width: '100%', justifyContent: 'center' }}>
-        {foods.map(food => {
+        {foods.map((food, index) => {
           return (
-            <FoodBox food={food} />
+            <FoodBox key={index} food={food} />
           )
         })}
       </Row>
-
-      
-
     </div>
   )
 }  
